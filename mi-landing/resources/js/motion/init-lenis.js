@@ -55,10 +55,18 @@ export const initLenis = ({ reducedMotion, ScrollTrigger, gsap }) => {
         });
     });
 
-    window.addEventListener('resize', () => {
-        lenis.resize();
-        ScrollTrigger.refresh();
-    });
+    let resizeTimer = null;
+    window.addEventListener(
+        'resize',
+        () => {
+            if (resizeTimer) window.clearTimeout(resizeTimer);
+            resizeTimer = window.setTimeout(() => {
+                lenis.resize();
+                ScrollTrigger.refresh();
+            }, 160);
+        },
+        { passive: true },
+    );
 
     return lenis;
 };
