@@ -13,8 +13,8 @@
 
     <div class="container-shell mt-12">
         <div data-card-stack-wrap class="relative">
-            <div data-card-stack class="grid gap-6 lg:relative lg:min-h-[780px] lg:gap-0">
-            @foreach ([
+            <div data-card-stack class="flex flex-col gap-6 lg:gap-10">
+            @php($cards = [
                 [
                     'tag' => 'Storytelling',
                     'title' => 'Historias que conectan y posicionan',
@@ -39,8 +39,13 @@
                     'video' => '/media/imb/stack-digital-loop.mp4',
                     'poster' => '/media/imb/stack-digital-poster.webp',
                 ],
-            ] as $card)
-                <article data-stack-card class="card-stack-item media-frame relative mx-auto w-full max-w-5xl overflow-hidden rounded-3xl border border-brand-border bg-brand-surface shadow-[0_38px_90px_-50px_rgba(31,31,31,0.45)] lg:absolute lg:inset-x-0 lg:top-0">
+            ])
+            @foreach ($cards as $index => $card)
+                <article
+                    data-stack-card
+                    class="card-stack-item media-frame relative mx-auto w-full max-w-5xl overflow-hidden rounded-3xl border border-brand-border bg-brand-surface shadow-[0_38px_90px_-50px_rgba(31,31,31,0.45)] lg:sticky lg:top-[calc(var(--card-stack-top,96px)+var(--stack-offset,0px))]"
+                    style="--stack-offset: {{ $index * 26 }}px;"
+                >
                     <div class="grid gap-0 md:grid-cols-[1.05fr_0.95fr]">
                         <div class="p-7 md:p-10">
                             <p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-text-muted">{{ $card['tag'] }}</p>

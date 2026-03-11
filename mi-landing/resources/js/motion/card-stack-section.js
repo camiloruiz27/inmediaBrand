@@ -14,11 +14,11 @@ export const initCardStackSection = ({ gsap, ScrollTrigger, reducedMotion }) => 
         const setInitial = () => {
             cards.forEach((card, index) => {
                 gsap.set(card, {
-                    y: index * 32,
-                    scale: 1 - index * 0.024,
-                    autoAlpha: 1,
-                    zIndex: cards.length - index,
-                    transformOrigin: '50% 0%',
+                    y: index === 0 ? 0 : 34,
+                    scale: index === 0 ? 1 : 0.96,
+                    autoAlpha: index === 0 ? 1 : 0.94,
+                    zIndex: index + 1,
+                    transformOrigin: '50% 8%',
                     force3D: true,
                 });
             });
@@ -26,59 +26,43 @@ export const initCardStackSection = ({ gsap, ScrollTrigger, reducedMotion }) => 
 
         setInitial();
 
-        if (reducedMotion) return;
+        if (reducedMotion) return () => cards.forEach((card) => gsap.set(card, { clearProps: 'all' }));
 
-        const timeline = gsap.timeline({
-            defaults: { ease: 'none' },
-            scrollTrigger: {
-                trigger: wrap,
-                pin: stack,
-                start: 'top top+=100',
-                end: () => `+=${window.innerHeight * (cards.length - 0.15)}`,
-                scrub: 0.6,
-                invalidateOnRefresh: true,
-                anticipatePin: 1,
-                fastScrollEnd: true,
-            },
-        });
+        const triggers = cards
+            .map((card, index) => {
+                if (index === 0) return null;
 
-        cards.forEach((card, index) => {
-            if (index === 0) return;
+                const previous = cards[index - 1];
 
-            const previous = cards[index - 1];
-            const at = index - 1;
+                return ScrollTrigger.create({
+                    trigger: card,
+                    start: 'top 78%',
+                    end: 'top 32%',
+                    scrub: 0.7,
+                    invalidateOnRefresh: true,
+                    onUpdate: ({ progress }) => {
+                        gsap.to(previous, {
+                            y: -74 * progress,
+                            scale: 1 - 0.09 * progress,
+                            autoAlpha: 1 - 0.76 * progress,
+                            duration: 0.12,
+                            overwrite: true,
+                        });
 
-            timeline.to(
-                previous,
-                {
-                    y: -95 - index * 14,
-                    scale: 0.88 - index * 0.018,
-                    autoAlpha: 0.34,
-                    duration: 1,
-                },
-                at,
-            );
-
-            timeline.fromTo(
-                card,
-                {
-                    y: 86,
-                    scale: 0.95,
-                    autoAlpha: 0.56,
-                },
-                {
-                    y: index * 8,
-                    scale: 1,
-                    autoAlpha: 1,
-                    duration: 1,
-                },
-                at,
-            );
-        });
+                        gsap.to(card, {
+                            y: 34 * (1 - progress),
+                            scale: 0.96 + 0.04 * progress,
+                            autoAlpha: 0.94 + 0.06 * progress,
+                            duration: 0.12,
+                            overwrite: true,
+                        });
+                    },
+                });
+            })
+            .filter(Boolean);
 
         return () => {
-            timeline.scrollTrigger?.kill();
-            timeline.kill();
+            triggers.forEach((trigger) => trigger.kill());
             cards.forEach((card) => gsap.set(card, { clearProps: 'all' }));
             gsap.set(stack, { clearProps: 'all' });
         };

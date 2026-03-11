@@ -181,6 +181,10 @@
         @apply transition duration-500 hover:-translate-y-1 hover:shadow-[0_35px_90px_-56px_rgba(0,0,0,0.6)];
     }
 
+    [data-card-stack-wrap] {
+        --card-stack-top: 88px;
+    }
+
     .card-stack-item {
         transform-origin: top center;
         min-height: clamp(420px, 46vw, 520px);
