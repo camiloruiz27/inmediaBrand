@@ -1,0 +1,45 @@
+export const mediaGuidelines = {
+    hero: {
+        preferred: 'video_loop',
+        ratio: '16:9 or 4:5',
+        duration: '8-14s',
+        formats: ['webm (vp9)', 'mp4 (h264)'],
+        maxWeight: '4.5MB desktop / 2.2MB mobile',
+        notes: 'Use cinematic movement with clear subject and negative space for copy.',
+    },
+    dna: {
+        preferred: 'still_sequence',
+        ratio: '4:5, 3:2',
+        formats: ['avif', 'webp'],
+        maxWeight: '220KB each',
+        notes: 'Documentary-style portraits, process shots, production environments.',
+    },
+    services: {
+        preferred: 'mixed_stills',
+        ratio: '16:10',
+        formats: ['avif', 'webp'],
+        maxWeight: '180KB each',
+        notes: 'Combine real set frames, branded layouts and UI captures.',
+    },
+    portfolio: {
+        preferred: 'video_cover_still',
+        ratio: '16:10, 16:11',
+        formats: ['webp', 'avif', 'mp4 teaser'],
+        maxWeight: '260KB still / 1.8MB teaser',
+        notes: 'Select high-contrast keyframes with visible subject and brand context.',
+    },
+    clients: {
+        preferred: 'logo_grid_plus_context',
+        ratio: '1:1',
+        formats: ['svg', 'webp'],
+        maxWeight: '45KB each',
+        notes: 'Keep logo legibility. Optional monochrome context backgrounds.',
+    },
+    cta: {
+        preferred: 'emotional_still_or_loop',
+        ratio: '16:9',
+        formats: ['avif', 'webp', 'mp4'],
+        maxWeight: '280KB still / 2MB loop',
+        notes: 'Use aspirational closing shot with warm contrast and clean focal point.',
+    },
+};
