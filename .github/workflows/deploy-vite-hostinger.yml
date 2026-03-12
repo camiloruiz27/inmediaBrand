@@ -35,6 +35,8 @@ jobs:
           username: ${{ secrets.HOSTINGER_USER }}
           key: ${{ secrets.HOSTINGER_SSH_KEY }}
           port: ${{ secrets.HOSTINGER_PORT }}
+          timeout: 60s
+          command_timeout: 2m
           script: |
             mkdir -p "${{ secrets.HOSTINGER_APP_PATH }}/public/build"
 
@@ -48,6 +50,7 @@ jobs:
           source: "public/build/*"
           target: "${{ secrets.HOSTINGER_APP_PATH }}/public/build"
           strip_components: 2
+          timeout: 60s
 
       - name: Clear Laravel caches
         uses: appleboy/ssh-action@v1.0.3
@@ -56,6 +59,8 @@ jobs:
           username: ${{ secrets.HOSTINGER_USER }}
           key: ${{ secrets.HOSTINGER_SSH_KEY }}
           port: ${{ secrets.HOSTINGER_PORT }}
+          timeout: 60s
+          command_timeout: 2m
           script: |
             cd "${{ secrets.HOSTINGER_APP_PATH }}"
             php artisan optimize:clear
