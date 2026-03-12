@@ -18,17 +18,15 @@ jobs:
         with:
           node-version: "22"
           cache: "npm"
-          cache-dependency-path: "mi-landing/package-lock.json"
+          cache-dependency-path: "package-lock.json"
 
       - name: Install dependencies
         run: npm ci --no-audit --no-fund
-        working-directory: mi-landing
 
       - name: Build Vite
         run: |
           npm run build
           test -f public/build/manifest.json
-        working-directory: mi-landing
 
       - name: Ensure remote build dir exists
         uses: appleboy/ssh-action@v1.0.3
@@ -47,9 +45,9 @@ jobs:
           username: ${{ secrets.HOSTINGER_USER }}
           key: ${{ secrets.HOSTINGER_SSH_KEY }}
           port: ${{ secrets.HOSTINGER_PORT }}
-          source: "mi-landing/public/build/*"
+          source: "public/build/*"
           target: "${{ secrets.HOSTINGER_APP_PATH }}/public/build"
-          strip_components: 3
+          strip_components: 2
 
       - name: Clear Laravel caches
         uses: appleboy/ssh-action@v1.0.3
