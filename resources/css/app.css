@@ -125,6 +125,45 @@
         @apply rounded-3xl border border-brand-border bg-brand-surface transition duration-300;
     }
 
+    .brand-mark {
+        @apply inline-flex items-center justify-center rounded-2xl;
+    }
+
+    .brand-mark--on-dark {
+        @apply bg-black/22 px-4 py-3;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 18px 48px -34px rgba(0, 0, 0, 0.65);
+    }
+
+    .brand-mark--on-light {
+        @apply bg-brand-secondary px-4 py-2.5;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 18px 40px -30px rgba(0, 0, 0, 0.28);
+    }
+
+    .brand-mark__image {
+        display: block;
+        width: auto;
+        object-fit: contain;
+    }
+
+    .brand-mark__image--hero {
+        height: 2rem;
+    }
+
+    .brand-mark__image--compact {
+        height: 1.62rem;
+    }
+
+    .brand-mark__image--footer {
+        height: 1.8rem;
+    }
+
+    .brand-mark__image--loader {
+        height: clamp(2.5rem, 5vw, 3.4rem);
+        margin-inline: auto;
+    }
+
     #site-sticky-header {
         @apply transition-all duration-500 ease-out;
     }
@@ -249,6 +288,42 @@
         z-index: 1;
     }
 
+    .hero-stage {
+        @apply grid gap-10 lg:grid-cols-[172px_minmax(0,1.12fr)_minmax(360px,0.88fr)] lg:items-center lg:gap-12;
+    }
+
+    .hero-copy {
+        max-width: 44rem;
+    }
+
+    .hero-media-stack {
+        @apply grid gap-4 self-center;
+    }
+
+    .hero-feature-card__scanline {
+        background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+        background-size: 100% 7px;
+        mix-blend-mode: soft-light;
+        opacity: 0.32;
+        pointer-events: none;
+    }
+
+    .hero-kpi-card {
+        @apply rounded-[1.4rem] border border-white/12 bg-white/[0.05] px-5 py-4 backdrop-blur;
+    }
+
+    .hero-kpi-card__label {
+        @apply text-[11px] font-semibold uppercase tracking-[0.18em] text-white/56;
+    }
+
+    .hero-kpi-card__value {
+        @apply mt-2 text-3xl font-semibold text-white;
+    }
+
+    .hero-proof-note {
+        box-shadow: 0 28px 80px -54px rgba(0, 0, 0, 0.72);
+    }
+
     [data-motion-section][data-section-kind='cinematic'],
     [data-motion-section][data-section-kind='emotional'] {
         position: relative;
@@ -314,7 +389,7 @@
     }
 
     .page-loader__brand {
-        @apply font-display text-4xl font-semibold tracking-tight text-white md:text-5xl;
+        @apply mx-auto flex items-center justify-center;
     }
 
     .page-loader__label {
@@ -332,9 +407,170 @@
         transform-origin: left center;
         animation: loader-progress 1.45s ease-in-out infinite;
     }
+
+    .podcast-strip {
+        box-shadow: 0 32px 90px -62px rgba(0, 0, 0, 0.7);
+    }
+
+    .podcast-link-card {
+        @apply flex h-full flex-col rounded-3xl border border-white/15 bg-black/20 p-5 transition duration-300 hover:-translate-y-1 hover:border-brand-accent hover:bg-black/30;
+    }
+
+    .podcast-link-card__eyebrow {
+        @apply text-[11px] font-semibold uppercase tracking-[0.22em] text-brand-accent;
+    }
+
+    .podcast-link-card__title {
+        @apply mt-4 text-lg font-semibold text-white;
+    }
+
+    .podcast-link-card__meta {
+        @apply mt-3 text-sm text-white/62;
+    }
+
+    .service-card {
+        min-height: 260px;
+    }
+
+    .service-card__index {
+        @apply inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-sm font-semibold text-brand-accent;
+    }
+
+    .about-visual__overlay {
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.42), rgba(0, 0, 0, 0.04) 45%, rgba(229, 193, 0, 0.14));
+        pointer-events: none;
+    }
+
+    .testimonial-photo-wrap::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.28), transparent 55%);
+        pointer-events: none;
+    }
+
+    .clients-theater {
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 38px 90px -70px rgba(0, 0, 0, 0.35);
+    }
+
+    .clients-theater::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+            radial-gradient(circle at 18% 18%, rgba(229, 193, 0, 0.12), transparent 28%),
+            radial-gradient(circle at 82% 74%, rgba(229, 193, 0, 0.08), transparent 26%);
+        pointer-events: none;
+    }
+
+    .clients-theater__intro {
+        @apply grid gap-6 xl:grid-cols-[0.9fr_0.55fr] xl:items-end;
+    }
+
+    .logo-theater-grid {
+        @apply relative mt-10 grid gap-4 md:grid-cols-3 xl:grid-cols-4;
+    }
+
+    .logo-theater-card {
+        @apply relative flex min-h-32 items-center justify-center overflow-hidden rounded-[1.6rem] border border-brand-border bg-brand-surface p-6 transition duration-300;
+        background-image:
+            linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(245, 245, 245, 0.92)),
+            linear-gradient(45deg, rgba(218, 218, 218, 0.16) 25%, transparent 25%, transparent 75%, rgba(218, 218, 218, 0.16) 75%, rgba(218, 218, 218, 0.16)),
+            linear-gradient(45deg, rgba(218, 218, 218, 0.16) 25%, transparent 25%, transparent 75%, rgba(218, 218, 218, 0.16) 75%, rgba(218, 218, 218, 0.16));
+        background-position: 0 0, 0 0, 12px 12px;
+        background-size: auto, 24px 24px, 24px 24px;
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.55),
+            0 22px 50px -38px rgba(0, 0, 0, 0.18);
+        will-change: transform;
+    }
+
+    .logo-theater-card--featured {
+        @apply min-h-40 md:col-span-2;
+    }
+
+    .logo-theater-card img {
+        max-height: 4.7rem;
+        filter: none;
+        opacity: 1;
+        transition: transform 280ms ease, opacity 280ms ease;
+    }
+
+    .logo-theater-card:hover img {
+        opacity: 1;
+        transform: scale(1.03);
+    }
+
+    .logo-theater-card:hover {
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.65),
+            0 28px 62px -42px rgba(0, 0, 0, 0.24);
+    }
+
+    .contact-input {
+        @apply w-full rounded-2xl border border-white/15 bg-white/8 px-4 py-3 text-white placeholder:text-white/38 outline-none transition focus:border-brand-accent focus:bg-white/10;
+    }
+
+    .whatsapp-float {
+        position: fixed;
+        right: 1.25rem;
+        bottom: 1.25rem;
+        z-index: 70;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        border-radius: 999px;
+        background: #1d1d1d;
+        color: #fff;
+        padding: 0.8rem 1rem 0.8rem 0.8rem;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 22px 60px -28px rgba(0, 0, 0, 0.65);
+        transition: transform 220ms ease, box-shadow 220ms ease, background 220ms ease;
+    }
+
+    .whatsapp-float:hover {
+        transform: translateY(-2px);
+        background: #111;
+        box-shadow: 0 28px 64px -28px rgba(0, 0, 0, 0.75);
+    }
+
+    .whatsapp-float__icon {
+        display: inline-flex;
+        width: 2.35rem;
+        height: 2.35rem;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(236, 236, 236, 0.95));
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.65),
+            0 12px 22px -16px rgba(0, 0, 0, 0.35);
+        overflow: hidden;
+    }
+
+    .whatsapp-float__icon-image {
+        display: block;
+        width: 1.3rem;
+        height: 1.3rem;
+        object-fit: contain;
+    }
+
+    .whatsapp-float__text {
+        @apply text-sm font-semibold;
+    }
 }
 
 @media (max-width: 1023px) {
+    .hero-stage {
+        @apply gap-8;
+    }
+
+    .hero-copy {
+        max-width: none;
+    }
+
     .horizontal-parallax-stage {
         min-height: auto !important;
     }
@@ -359,6 +595,20 @@
 
     .card-stack-item {
         min-height: auto;
+    }
+
+    .logo-theater-card--featured {
+        min-height: 9rem;
+    }
+
+    .whatsapp-float {
+        right: 1rem;
+        bottom: 1rem;
+        padding-right: 0.85rem;
+    }
+
+    .whatsapp-float__text {
+        display: none;
     }
 }
 

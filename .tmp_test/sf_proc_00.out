@@ -1,0 +1,15 @@
+
+   PASS  Tests\Unit\ExampleTest
+  ✓ that true is true                                                                                            0.04s  
+
+   PASS  Tests\Feature\ContactLeadTest
+  ✓ the landing page returns a successful response                                                               1.27s  
+  ✓ the contact form validates required fields                                                                   0.15s  
+  ✓ the contact form sends a lead notification email                                                             0.13s  
+
+   PASS  Tests\Feature\ExampleTest
+  ✓ the application returns a successful response                                                                0.11s  
+
+  Tests:    5 passed (13 assertions)
+  Duration: 2.52s
+
