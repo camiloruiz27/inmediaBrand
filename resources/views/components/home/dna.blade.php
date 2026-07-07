@@ -1,32 +1,51 @@
+@php
+    $aboutImagePath = public_path('assets/about/enrique-gonzalez-bts.jpeg');
+    $hasAboutImage = file_exists($aboutImagePath);
+@endphp
+
 <section id="adn" data-motion-section data-section-kind="editorial" class="bg-brand-bg py-20 md:py-28">
     <div class="container-shell">
-        <div class="grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-end">
+        <div class="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-stretch">
             <div class="space-y-7">
-                <span data-reveal-item class="eyebrow">Nuestro ADN</span>
+                <span data-reveal-item class="eyebrow">Sobre Nosotros</span>
                 <h2 data-reveal-item data-split="lines" class="text-3xl font-semibold leading-tight text-brand-secondary md:text-5xl">
-                    Somos una agencia y productora audiovisual con gran trayectoria, creatividad y compromiso.
+                    Quiénes Somos
                 </h2>
                 <p data-reveal-item class="max-w-2xl text-base leading-relaxed text-brand-text-muted md:text-lg">
-                    Durante mas de una decada hemos ayudado a las empresas a comunicar experiencias honestas y emocionales a traves de estrategias audiovisuales efectivas que conectan con sus audiencias.
+                    Somos una productora audiovisual fundada en 2017 y liderada por Enrique González, su CEO, Productor Audiovisual y Filmmaker con más de 28 años de experiencia en la industria de la televisión y el video corporativo. Gracias a su visión y experticia, ha liderado producciones de alto impacto para multinacionales como Cargill, Nestlé, Federación Nacional de Cafeteros, Starbucks, Grupo Prochem y destacadas compañías del sector industrial de la caña de azúcar, el sector avícola y el sector químico industrial, logrando exportar su trabajo a Europa, Centroamérica y USA.
                 </p>
+
+                <div data-reveal-item data-media-reveal="editorial" class="panel overflow-hidden p-8">
+                    <div class="grid gap-6 sm:grid-cols-3">
+                        <div data-hover-lift>
+                            <dt class="text-3xl font-semibold text-brand-secondary">10+ Años</dt>
+                            <dd class="mt-2 text-sm text-brand-text-muted">De sólida trayectoria empresarial en el mercado.</dd>
+                        </div>
+                        <div data-hover-lift>
+                            <dt class="text-3xl font-semibold text-brand-secondary">Equipos y Tecnología</dt>
+                            <dd class="mt-2 text-sm text-brand-text-muted">Producción y postproducción con estándares técnicos internacionales.</dd>
+                        </div>
+                        <div data-hover-lift>
+                            <dt class="text-3xl font-semibold text-brand-secondary">Operación Transnacional</dt>
+                            <dd class="mt-2 text-sm text-brand-text-muted">Empresa con raíces caleñas y capacidad de cobertura fuera del país.</dd>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div data-reveal-item data-media-reveal="editorial" class="panel p-8">
-                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-text-muted">Lo que nos define</p>
-                <dl class="mt-6 grid gap-6 sm:grid-cols-3">
-                    <div data-hover-lift>
-                        <dt class="text-3xl font-semibold text-brand-secondary">12+</dt>
-                        <dd class="mt-2 text-sm text-brand-text-muted">Anos de experiencia en comunicacion de marca.</dd>
-                    </div>
-                    <div data-hover-lift>
-                        <dt class="text-3xl font-semibold text-brand-secondary">360</dt>
-                        <dd class="mt-2 text-sm text-brand-text-muted">Estrategia y produccion en un mismo equipo.</dd>
-                    </div>
-                    <div data-hover-lift>
-                        <dt class="text-3xl font-semibold text-brand-secondary">Cali</dt>
-                        <dd class="mt-2 text-sm text-brand-text-muted">Base local con alcance regional y digital.</dd>
-                    </div>
-                </dl>
+            <div data-reveal-item data-media-reveal="editorial" class="about-visual panel relative isolate overflow-hidden">
+                @if ($hasAboutImage)
+                    <img
+                        src="{{ asset('assets/about/enrique-gonzalez-bts.jpeg') }}"
+                        alt="Enrique González Detrás de cámaras"
+                        class="h-full min-h-[420px] w-full object-cover"
+                        loading="lazy"
+                        decoding="async"
+                    />
+                @else
+                    <div class="min-h-[420px] bg-[linear-gradient(140deg,_rgba(24,24,24,0.95)_0%,_rgba(92,92,92,0.45)_50%,_rgba(229,193,0,0.4)_100%)]"></div>
+                @endif
+                <div class="about-visual__overlay absolute inset-0"></div>
             </div>
         </div>
     </div>

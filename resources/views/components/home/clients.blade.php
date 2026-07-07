@@ -1,45 +1,70 @@
-<section id="clientes" data-motion-section data-section-kind="light" class="bg-brand-bg py-20 md:py-28">
+@php
+    $clientFiles = collect(\Illuminate\Support\Facades\File::files(public_path('assets/clients')))
+        ->filter(fn ($file) => in_array(strtolower($file->getExtension()), ['png', 'jpg', 'jpeg', 'webp', 'svg'], true))
+        ->reject(fn ($file) => strtolower($file->getFilename()) === 'logoweb-3.png')
+        ->sortBy(function ($file) {
+            preg_match('/^(\d+)/', $file->getFilename(), $matches);
+
+            return isset($matches[1]) ? (int) $matches[1] : PHP_INT_MAX;
+        })
+        ->values()
+        ->all();
+
+    $featuredClients = $clientFiles;
+
+    $testimonials = [
+        [
+            'name' => 'Gerente',
+            'role' => 'Cargo',
+            'quote' => 'Espacio reservado para declaraciones escritas e imágenes de los gerentes y directores que recomiendan a In Media Brand.',
+        ],
+        [
+            'name' => 'Gerente',
+            'role' => 'Cargo',
+            'quote' => 'Espacio reservado para declaraciones escritas e imágenes de los gerentes y directores que recomiendan a In Media Brand.',
+        ],
+        [
+            'name' => 'Gerente',
+            'role' => 'Cargo',
+            'quote' => 'Espacio reservado para declaraciones escritas e imágenes de los gerentes y directores que recomiendan a In Media Brand.',
+        ],
+    ];
+@endphp
+
+<section id="clientes" data-motion-section data-section-kind="editorial" class="bg-brand-bg py-20 text-brand-text md:py-28">
     <div class="container-shell">
         <div class="max-w-3xl space-y-6">
             <span data-reveal-item class="eyebrow">Clientes</span>
             <h2 data-reveal-item class="text-3xl font-semibold leading-tight text-brand-secondary md:text-5xl">
-                Marcas que han confiado en nuestro enfoque creativo y estrategico.
+                Clientes que han Confiado en nuestro trabajo.
             </h2>
+            <p data-reveal-item class="text-base leading-relaxed text-brand-text-muted md:text-lg">
+                Espacio reservado para declaraciones escritas e imágenes de los gerentes y directores que recomiendan a In Media Brand.
+            </p>
         </div>
 
-        @php
-            $clients = [
-                'bucanero.jpg',
-                'cafeteros.jpg',
-                'caracol.jpg',
-                'cargill.jpg',
-                'cenicana.jpg',
-                'chipichape.jpg',
-                'cutis.jpg',
-                'energifondo.jpg',
-                'fenavi.jpg',
-                'fuerza-activa.jpg',
-                'gases.jpg',
-                'karens.jpg',
-                'logoweb-3.png',
-                'melendez.jpg',
-                'nestle.jpg',
-                'protecnica.jpg',
-                'qbano.jpg',
-                'rdw.jpg',
-                'real.jpg',
-                'tecnicana.jpg',
-            ];
-        @endphp
+        <div class="clients-theater mt-14 rounded-[2rem] border border-brand-border/80 bg-brand-surface p-6 md:p-8 xl:p-10">
 
-        <div class="mt-12 hidden overflow-hidden rounded-3xl border border-brand-border bg-brand-surface p-4 md:block" data-clients-marquee>
-            <div class="clients-marquee-track flex w-max items-center gap-4" data-clients-track>
-                @foreach (array_merge($clients, $clients) as $client)
-                    <article class="clients-logo-card flex h-28 w-48 shrink-0 items-center justify-center rounded-2xl border border-brand-border/80 bg-brand-surface-2/45 px-5" data-clients-logo>
+            <div class="logo-theater-grid">
+                @foreach ($featuredClients as $client)
+                    @php
+                        $featuredSpan = in_array($loop->iteration, [1, 5, 9], true);
+                        $clientFilename = $client->getFilename();
+                        $clientLabel = preg_replace('/^\d+\s*/', '', pathinfo($clientFilename, PATHINFO_FILENAME));
+                    @endphp
+                    <article
+                        data-reveal-item
+                        data-clients-logo
+                        data-hover-lift
+                        @class([
+                            'logo-theater-card',
+                            'logo-theater-card--featured' => $featuredSpan,
+                        ])
+                    >
                         <img
-                            src="{{ asset('assets/clients/' . $client) }}"
-                            alt="Logo cliente {{ pathinfo($client, PATHINFO_FILENAME) }}"
-                            class="max-h-14 w-full object-contain"
+                            src="{{ asset('assets/clients/' . $clientFilename) }}"
+                            alt="Logo cliente {{ $clientLabel }}"
+                            class="max-h-16 w-full object-contain"
                             loading="lazy"
                             decoding="async"
                         />
@@ -48,25 +73,33 @@
             </div>
         </div>
 
-        <div class="mt-8 grid grid-cols-2 gap-3 md:hidden" data-clients-grid>
-            @foreach ($clients as $client)
-                <article class="clients-logo-card flex h-24 items-center justify-center rounded-2xl border border-brand-border bg-brand-surface px-4" data-clients-logo>
-                    <img
-                        src="{{ asset('assets/clients/' . $client) }}"
-                        alt="Logo cliente {{ pathinfo($client, PATHINFO_FILENAME) }}"
-                        class="max-h-12 w-full object-contain"
-                        loading="lazy"
-                        decoding="async"
-                    />
+        {{--<div class="mt-12 grid gap-6 lg:grid-cols-3">
+            @foreach ($testimonials as $testimonial)
+                @php
+                    $photoPath = 'assets/testimonials/testimonial-' . str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) . '.jpg';
+                    $hasPhoto = file_exists(public_path($photoPath));
+                @endphp
+                <article data-reveal-item class="panel overflow-hidden border-brand-border bg-brand-surface p-0 shadow-[0_28px_70px_-58px_rgba(0,0,0,0.35)]">
+                    <div class="testimonial-photo-wrap relative h-56 overflow-hidden bg-brand-surface-2">
+                        @if ($hasPhoto)
+                            <img
+                                src="{{ asset($photoPath) }}"
+                                alt="{{ $testimonial['name'] }}"
+                                class="h-full w-full object-cover"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                        @else
+                            <div class="h-full bg-[linear-gradient(135deg,_rgba(255,255,255,0.95)_0%,_rgba(229,229,229,0.92)_50%,_rgba(242,217,78,0.4)_100%)]"></div>
+                        @endif
+                    </div>
+                    <div class="p-7">
+                        <p class="text-sm leading-relaxed text-brand-text-muted">{{ $testimonial['quote'] }}</p>
+                        <p class="mt-5 font-semibold text-brand-secondary">{{ $testimonial['name'] }}</p>
+                        <p class="mt-1 text-xs uppercase tracking-[0.18em] text-brand-text-muted">{{ $testimonial['role'] }}</p>
+                    </div>
                 </article>
             @endforeach
-        </div>
-
-        <div data-reveal-item class="mt-8 panel p-7">
-            <p class="text-sm leading-relaxed text-brand-text-muted">
-                "Inmedia Brand tradujo nuestra vision en piezas audiovisuales con alto nivel de ejecucion y claridad de mensaje."
-            </p>
-            <p class="mt-4 text-xs font-semibold uppercase tracking-[0.2em] text-brand-text">Testimonio cliente</p>
-        </div>
+        </div>--}}
     </div>
 </section>
