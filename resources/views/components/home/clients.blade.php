@@ -11,6 +11,29 @@
         ->all();
 
     $featuredClients = $clientFiles;
+    $largerLogoFiles = [
+        '1 CARGILL.png',
+        '2 FEDERACION DE CAFETEROS.png',
+        '3 NESTLE.png',
+        '5 PROCHEM.png',
+        '7 ATALAC.png',
+        '8 ASOCAÑA.png',
+        '12 BUCANERO.png',
+        '13 CARACOL.PNG',
+        '14 FONDEBUCANERO.png',
+        '17 MELENDEZ.PNG',
+        '19 QBANO.png',
+        '24 ENERGIFONDO.png',
+        '29 HISTORY_CHANNEL.png',
+        '30 KARENS_PIZZA.png',
+    ];
+    $largestLogoFiles = [
+        '1 CARGILL.png',
+        '7 ATALAC.png',
+        '12 BUCANERO.png',
+        '17 MELENDEZ.PNG',
+        '19 QBANO.png',
+    ];
 
     $testimonials = [
         [
@@ -48,9 +71,14 @@
             <div class="logo-theater-grid">
                 @foreach ($featuredClients as $client)
                     @php
-                        $featuredSpan = in_array($loop->iteration, [1, 5, 9], true);
+                        $featuredSpan = ($loop->iteration - 1) % 4 === 0;
                         $clientFilename = $client->getFilename();
                         $clientLabel = preg_replace('/^\d+\s*/', '', pathinfo($clientFilename, PATHINFO_FILENAME));
+                        $logoScaleClass = match (true) {
+                            in_array($clientFilename, $largestLogoFiles, true) => 'logo-theater-card__image--largest',
+                            in_array($clientFilename, $largerLogoFiles, true) => 'logo-theater-card__image--larger',
+                            default => '',
+                        };
                     @endphp
                     <article
                         data-reveal-item
@@ -64,7 +92,7 @@
                         <img
                             src="{{ asset('assets/clients/' . $clientFilename) }}"
                             alt="Logo cliente {{ $clientLabel }}"
-                            class="max-h-16 w-full object-contain"
+                            @class(['logo-theater-card__image', $logoScaleClass])
                             loading="lazy"
                             decoding="async"
                         />

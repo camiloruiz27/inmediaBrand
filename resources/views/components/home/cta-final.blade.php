@@ -1,6 +1,7 @@
 @php
     $rawWhatsapp = config('imb.contact_whatsapp');
     $cleanWhatsapp = preg_replace('/\D+/', '', $rawWhatsapp ?? '') ?: '573000000000';
+    $whatsappMessage = rawurlencode('Hola In Media Brand, quiero recibir informacion sobre sus servicios audiovisuales.');
 @endphp
 
 <section id="contacto" data-motion-section data-section-kind="emotional" data-cta-final class="bg-brand-secondary py-20 text-white md:py-28">
@@ -31,7 +32,7 @@
                         <div class="rounded-2xl border border-white/15 bg-black/20 p-5">
                             <p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-accent">Enlace Directo</p>
                             <a
-                                href="https://wa.me/{{ $cleanWhatsapp }}"
+                                href="https://wa.me/{{ $cleanWhatsapp }}?text={{ $whatsappMessage }}"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 class="mt-3 inline-flex items-center gap-2 text-base font-semibold text-white"
