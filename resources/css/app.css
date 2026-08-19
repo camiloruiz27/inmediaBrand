@@ -471,6 +471,7 @@
 
     .logo-theater-grid {
         @apply relative mt-10 grid gap-4 md:grid-cols-3 xl:grid-cols-4;
+        grid-auto-flow: dense;
     }
 
     .logo-theater-card {
@@ -491,16 +492,35 @@
         @apply min-h-40 md:col-span-2;
     }
 
-    .logo-theater-card img {
-        max-height: 4.7rem;
+    .logo-theater-card__image {
+        max-height: 5.35rem;
+        max-width: 86%;
+        width: auto;
+        object-fit: contain;
         filter: none;
         opacity: 1;
         transition: transform 280ms ease, opacity 280ms ease;
     }
 
-    .logo-theater-card:hover img {
+    .logo-theater-card__image--larger {
+        transform: scale(1.18);
+    }
+
+    .logo-theater-card__image--largest {
+        transform: scale(1.35);
+    }
+
+    .logo-theater-card:hover .logo-theater-card__image {
         opacity: 1;
         transform: scale(1.03);
+    }
+
+    .logo-theater-card:hover .logo-theater-card__image--larger {
+        transform: scale(1.22);
+    }
+
+    .logo-theater-card:hover .logo-theater-card__image--largest {
+        transform: scale(1.4);
     }
 
     .logo-theater-card:hover {

@@ -2,7 +2,7 @@
 
 return [
     'contact_form_to' => env('CONTACT_FORM_TO', 'contacto@inmediabrand.com'),
-    'contact_whatsapp' => env('CONTACT_WHATSAPP', '+573000000000'),
+    'contact_whatsapp' => env('CONTACT_WHATSAPP', '+573166918142'),
     'podcast_spotify_url' => env('PODCAST_SPOTIFY_URL'),
     'podcast_youtube_url' => env('PODCAST_YOUTUBE_URL'),
     'youtube_channel_url' => env('IMB_YOUTUBE_CHANNEL_URL', 'https://www.youtube.com/@InMediaBrandSAS'),

@@ -1,10 +1,11 @@
 @php
     $rawWhatsapp = config('imb.contact_whatsapp');
     $cleanWhatsapp = preg_replace('/\D+/', '', $rawWhatsapp ?? '') ?: '573000000000';
+    $whatsappMessage = rawurlencode('Hola In Media Brand, quiero recibir informacion sobre sus servicios audiovisuales.');
 @endphp
 
 <a
-    href="https://wa.me/{{ $cleanWhatsapp }}"
+    href="https://wa.me/{{ $cleanWhatsapp }}?text={{ $whatsappMessage }}"
     target="_blank"
     rel="noopener noreferrer"
     class="whatsapp-float"
