@@ -74,11 +74,6 @@
                         $featuredSpan = ($loop->iteration - 1) % 4 === 0;
                         $clientFilename = $client->getFilename();
                         $clientLabel = preg_replace('/^\d+\s*/', '', pathinfo($clientFilename, PATHINFO_FILENAME));
-                        $logoScaleClass = match (true) {
-                            in_array($clientFilename, $largestLogoFiles, true) => 'logo-theater-card__image--largest',
-                            in_array($clientFilename, $largerLogoFiles, true) => 'logo-theater-card__image--larger',
-                            default => '',
-                        };
                     @endphp
                     <article
                         data-reveal-item
@@ -92,7 +87,7 @@
                         <img
                             src="{{ asset('assets/clients/' . $clientFilename) }}"
                             alt="Logo cliente {{ $clientLabel }}"
-                            @class(['logo-theater-card__image', $logoScaleClass])
+                            class="logo-theater-card__image"
                             loading="lazy"
                             decoding="async"
                         />

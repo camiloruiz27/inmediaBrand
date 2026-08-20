@@ -148,11 +148,11 @@
     }
 
     .brand-mark__image--hero {
-        height: 2rem;
+        height: 3.8rem;
     }
 
     .brand-mark__image--compact {
-        height: 1.62rem;
+        height: 2.5rem;
     }
 
     .brand-mark__image--footer {
@@ -493,7 +493,8 @@
     }
 
     .logo-theater-card__image {
-        max-height: 5.35rem;
+        height: clamp(54px, 6vw, 80px);
+        max-height: clamp(54px, 6vw, 80px);
         max-width: 86%;
         width: auto;
         object-fit: contain;
@@ -503,24 +504,24 @@
     }
 
     .logo-theater-card__image--larger {
-        transform: scale(1.18);
+        transform: none;
     }
 
     .logo-theater-card__image--largest {
-        transform: scale(1.35);
+        transform: none;
     }
 
     .logo-theater-card:hover .logo-theater-card__image {
         opacity: 1;
-        transform: scale(1.03);
+        transform: none;
     }
 
     .logo-theater-card:hover .logo-theater-card__image--larger {
-        transform: scale(1.22);
+        transform: none;
     }
 
     .logo-theater-card:hover .logo-theater-card__image--largest {
-        transform: scale(1.4);
+        transform: none;
     }
 
     .logo-theater-card:hover {
