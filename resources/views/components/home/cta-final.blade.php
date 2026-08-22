@@ -10,7 +10,7 @@
             <div class="grid gap-10 lg:grid-cols-[1.05fr_0.95fr]">
                 <div class="space-y-6">
                     <span data-reveal-item class="inline-flex rounded-full border border-white/20 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-accent">
-                        Captura de Leads / Cierre
+                        Contactanos
                     </span>
                     <h2 data-split="lines" data-reveal-item class="text-3xl font-semibold leading-tight md:text-5xl">
                         Comencemos a planificar tu próximo proyecto.
@@ -51,7 +51,7 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('contact.store') }}" method="POST" class="space-y-5">
+                    <form action="{{ route('contact.store') }}" method="POST" class="space-y-5" data-contact-form>
                         @csrf
 
                         <div>
@@ -81,7 +81,7 @@
 
                             <div>
                                 <label for="telefono" class="mb-2 block text-sm font-medium text-white/80">Teléfono</label>
-                                <input id="telefono" name="telefono" type="text" value="{{ old('telefono') }}" class="contact-input" required>
+                                <input id="telefono" name="telefono" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="40" value="{{ old('telefono') }}" class="contact-input" data-numeric-only required>
                                 @error('telefono')
                                     <p class="mt-2 text-sm text-red-200">{{ $message }}</p>
                                 @enderror
@@ -96,12 +96,56 @@
                             @enderror
                         </div>
 
-                        <button type="submit" class="btn-primary w-full justify-center">
-                            Enviar propuesta
+                        <button type="submit" class="btn-primary w-full justify-center" data-contact-submit>
+                            <span data-contact-submit-label>Enviar propuesta</span>
+                            <span data-contact-submit-loading class="hidden">Enviando...</span>
                         </button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
+    <div
+        data-contact-loading
+        class="fixed inset-0 z-[9998] hidden place-items-center bg-brand-secondary/88 px-6 text-center text-white backdrop-blur-sm"
+        role="status"
+        aria-live="polite"
+        aria-hidden="true"
+    >
+        <div class="w-full max-w-sm rounded-3xl border border-white/15 bg-black/30 p-8 shadow-[0_30px_90px_-45px_rgba(0,0,0,0.8)]">
+            <div class="mx-auto h-12 w-12 animate-spin rounded-full border-4 border-white/20 border-t-brand-primary"></div>
+            <p class="mt-6 text-lg font-semibold">Enviando información</p>
+            <p class="mt-2 text-sm leading-relaxed text-white/70">Por favor espera un momento.</p>
+        </div>
+    </div>
 </section>
+
+<script>
+    (() => {
+        const form = document.querySelector('[data-contact-form]');
+        const loading = document.querySelector('[data-contact-loading]');
+        const submit = document.querySelector('[data-contact-submit]');
+        const submitLabel = document.querySelector('[data-contact-submit-label]');
+        const submitLoading = document.querySelector('[data-contact-submit-loading]');
+        const numericFields = document.querySelectorAll('[data-numeric-only]');
+
+        if (!form || !loading || !submit) return;
+
+        numericFields.forEach((field) => {
+            field.addEventListener('input', () => {
+                field.value = field.value.replace(/\D+/g, '');
+            });
+        });
+
+        form.addEventListener('submit', () => {
+            loading.classList.remove('hidden');
+            loading.classList.add('grid');
+            loading.setAttribute('aria-hidden', 'false');
+            submit.disabled = true;
+            submit.classList.add('pointer-events-none', 'opacity-80');
+            submitLabel?.classList.add('hidden');
+            submitLoading?.classList.remove('hidden');
+        });
+    })();
+</script>

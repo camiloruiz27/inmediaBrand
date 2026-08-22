@@ -71,18 +71,13 @@
             <div class="logo-theater-grid">
                 @foreach ($featuredClients as $client)
                     @php
-                        $featuredSpan = ($loop->iteration - 1) % 4 === 0;
                         $clientFilename = $client->getFilename();
                         $clientLabel = preg_replace('/^\d+\s*/', '', pathinfo($clientFilename, PATHINFO_FILENAME));
                     @endphp
                     <article
                         data-reveal-item
                         data-clients-logo
-                        data-hover-lift
-                        @class([
-                            'logo-theater-card',
-                            'logo-theater-card--featured' => $featuredSpan,
-                        ])
+                        class="logo-theater-card"
                     >
                         <img
                             src="{{ asset('assets/clients/' . $clientFilename) }}"
