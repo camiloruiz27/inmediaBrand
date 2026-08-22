@@ -1,4 +1,4 @@
-import { q, qa, isDesktop, isTouchDevice } from './utils';
+import { q, qa } from './utils';
 
 export const initClientsLogos = ({ gsap, ScrollTrigger, reducedMotion }) => {
     const logos = qa('[data-clients-logo]');
@@ -21,18 +21,6 @@ export const initClientsLogos = ({ gsap, ScrollTrigger, reducedMotion }) => {
             },
         );
 
-        if (isDesktop() && !isTouchDevice()) {
-            logos.forEach((logo, index) => {
-                gsap.to(logo, {
-                    y: index % 2 === 0 ? -6 : -4,
-                    duration: 2.8 + (index % 3) * 0.35,
-                    ease: 'sine.inOut',
-                    repeat: -1,
-                    yoyo: true,
-                    delay: index * 0.08,
-                });
-            });
-        }
     }
 
     const marqueeTrack = q('[data-clients-track]');

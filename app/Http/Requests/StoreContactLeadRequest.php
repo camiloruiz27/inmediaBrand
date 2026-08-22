@@ -20,7 +20,7 @@ class StoreContactLeadRequest extends FormRequest
             'nombre_completo' => ['required', 'string', 'max:120'],
             'empresa' => ['required', 'string', 'max:120'],
             'correo_corporativo' => ['required', 'email', 'max:160'],
-            'telefono' => ['required', 'string', 'max:40'],
+            'telefono' => ['required', 'string', 'max:40', 'regex:/^[0-9]+$/'],
             'proyecto' => ['required', 'string', 'max:5000'],
         ];
     }
@@ -33,6 +33,17 @@ class StoreContactLeadRequest extends FormRequest
         return [
             'nombre_completo' => 'nombre completo',
             'correo_corporativo' => 'correo corporativo',
+            'telefono' => 'teléfono',
+        ];
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'telefono.regex' => 'El teléfono solo debe contener números.',
         ];
     }
 }

@@ -470,12 +470,12 @@
     }
 
     .logo-theater-grid {
-        @apply relative mt-10 grid gap-4 md:grid-cols-3 xl:grid-cols-4;
+        @apply relative mt-10 grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-5;
         grid-auto-flow: dense;
     }
 
     .logo-theater-card {
-        @apply relative flex min-h-32 items-center justify-center overflow-hidden rounded-[1.6rem] border border-brand-border bg-brand-surface p-6 transition duration-300;
+        @apply relative flex aspect-[4/3] items-center justify-center overflow-hidden rounded-[1.6rem] border border-brand-border bg-brand-surface p-6 transition duration-300;
         background-image:
             linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(245, 245, 245, 0.92)),
             linear-gradient(45deg, rgba(218, 218, 218, 0.16) 25%, transparent 25%, transparent 75%, rgba(218, 218, 218, 0.16) 75%, rgba(218, 218, 218, 0.16)),
@@ -488,14 +488,10 @@
         will-change: transform;
     }
 
-    .logo-theater-card--featured {
-        @apply min-h-40 md:col-span-2;
-    }
-
     .logo-theater-card__image {
-        height: clamp(54px, 6vw, 80px);
-        max-height: clamp(54px, 6vw, 80px);
-        max-width: 86%;
+        height: clamp(58px, 6vw, 78px);
+        max-height: clamp(58px, 6vw, 78px);
+        max-width: 82%;
         width: auto;
         object-fit: contain;
         filter: none;
@@ -616,10 +612,6 @@
 
     .card-stack-item {
         min-height: auto;
-    }
-
-    .logo-theater-card--featured {
-        min-height: 9rem;
     }
 
     .whatsapp-float {
